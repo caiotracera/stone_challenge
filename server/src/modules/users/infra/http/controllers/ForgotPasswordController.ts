@@ -3,9 +3,9 @@ import { container } from 'tsyringe';
 
 import SendForgotPasswordEmailService from '@modules/users/services/SendForgotPasswordEmailService';
 
-interface ICreateBody {
+type ICreateBody = {
   email: string;
-}
+};
 
 export default class ForgotPasswordController {
   public async create(request: Request, response: Response): Promise<Response> {
