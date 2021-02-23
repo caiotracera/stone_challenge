@@ -5,7 +5,7 @@ const Home: React.FC = () => {
   return (
     <div className="container">
       <Head>
-        <title>Início - Move.it</title>
+        <title>Início StoneMarvel</title>
       </Head>
       <Container>
         <h1>Oi</h1>
