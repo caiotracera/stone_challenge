@@ -69,8 +69,14 @@ $ cd stone_challenge
  - [ ] <b>Backend</b>
    - [ ] Users
      - [ ] Create migrations
+       - [x] User
+       - [ ] UserToken
      - [ ] Create entity
+       - [x] User
+       - [ ] UserToken
      - [ ] Create repositories
+       - [x] User
+       - [ ] UserToken
      - [ ] Create services
        - [x] Authenticate user sevice
        - [x] Create user service
@@ -80,6 +86,27 @@ $ cd stone_challenge
        - [x] Update profile service
        - [x] Update user avatar service
      - [ ] Create tests
+       - [x] Authenticate user sevice
+       - [x] Create user service
+       - [ ] Reset password service
+       - [ ] Send forgot password email service
+       - [x] Show profile service
+       - [x] Update profile service
+       - [x] Update user avatar service
+   - [ ] Deploy
+<br /><br />
+ - [ ] <b>Frontend</b>
+   - [ ] Design
+   - [ ] Implementations:
+     - [ ] Sign up
+     - [ ] Sign in
+     - [ ] Log out
+     - [ ] Edit profile
+     - [ ] List comics
+     - [ ] Fav/unfav comics
+     - [ ] List characters
+     - [ ] Fav/unfav characters
+     - [ ] List fav comics/characters
 
 # :memo: License
 
