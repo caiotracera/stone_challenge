@@ -67,29 +67,29 @@ $ cd stone_challenge
 
 # :pencil2: Todo
  - [ ] <b>Backend</b>
-   - [ ] Users
-     - [ ] Create migrations
+   - [x] Users
+     - [x] Create migrations
        - [x] User
-       - [ ] UserToken
-     - [ ] Create entity
+       - [x] UserToken
+     - [x] Create entity
        - [x] User
-       - [ ] UserToken
-     - [ ] Create repositories
+       - [x] UserToken
+     - [x] Create repositories
        - [x] User
-       - [ ] UserToken
-     - [ ] Create services
+       - [x] UserToken
+     - [x] Create services
        - [x] Authenticate user sevice
        - [x] Create user service
-       - [ ] Reset password service
-       - [ ] Send forgot password email service
+       - [x] Reset password service
+       - [x] Send forgot password email service
        - [x] Show profile service
        - [x] Update profile service
        - [x] Update user avatar service
-     - [ ] Create tests
+     - [x] Create tests
        - [x] Authenticate user sevice
        - [x] Create user service
-       - [ ] Reset password service
-       - [ ] Send forgot password email service
+       - [x] Reset password service
+       - [x] Send forgot password email service
        - [x] Show profile service
        - [x] Update profile service
        - [x] Update user avatar service
