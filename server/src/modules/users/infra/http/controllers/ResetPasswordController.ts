@@ -3,10 +3,10 @@ import { container } from 'tsyringe';
 
 import ResetPasswordService from '@modules/users/services/ResetPasswordService';
 
-interface ICreateBody {
+type ICreateBody = {
   password: string;
   token: string;
-}
+};
 
 export default class ResetPasswordController {
   public async create(request: Request, response: Response): Promise<Response> {
