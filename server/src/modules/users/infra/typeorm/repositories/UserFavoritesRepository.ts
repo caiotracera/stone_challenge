@@ -38,4 +38,9 @@ export default class UserFavoritesRepository
 
     return favorites;
   }
+
+  public async findById(id: string): Promise<UserFavorite | undefined> {
+    const favorite = await this.ormRepository.findOne({ id });
+    return favorite;
+  }
 }

@@ -47,4 +47,12 @@ export default class FakeUserFavoritesRepository
 
     return favoritesList;
   }
+
+  public async findById(id: string): Promise<UserFavorite | undefined> {
+    const favorite = this.favorites.find(
+      eachFavorite => eachFavorite.id === id,
+    );
+
+    return favorite;
+  }
 }

@@ -5,4 +5,5 @@ export default interface IUserFavoritesRepository {
   add(data: IAddFavoriteDTO): Promise<UserFavorite>;
   delete(id: string): Promise<void>;
   listByType(type: 'characters' | 'comics'): Promise<UserFavorite[]>;
+  findById(id: string): Promise<UserFavorite | undefined>;
 }
