@@ -41,7 +41,7 @@ export default class AddFavoriteService {
       type,
     });
 
-    await this.cacheProvider.invalidate(`favorites-${user_id}`);
+    await this.cacheProvider.invalidate(`favorites-${type}-${user_id}`);
     return favorite;
   }
 }
