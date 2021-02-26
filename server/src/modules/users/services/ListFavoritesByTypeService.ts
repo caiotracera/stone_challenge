@@ -8,7 +8,7 @@ import IUserFavorite from '@modules/users/infra/typeorm/entities/UserFavorite';
 
 type IRequest = {
   user_id: string;
-  type: 'characters' | 'comics';
+  type: string;
 };
 
 @injectable()

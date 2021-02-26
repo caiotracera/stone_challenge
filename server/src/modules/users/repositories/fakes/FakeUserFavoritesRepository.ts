@@ -35,7 +35,7 @@ export default class FakeUserFavoritesRepository
   }
 
   public async listByType(
-    type: 'characters' | 'comics',
+    type: string,
   ): Promise<UserFavorite[]> {
     const favoritesList: UserFavorite[] = [];
 

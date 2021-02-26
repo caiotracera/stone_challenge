@@ -32,7 +32,7 @@ export default class UserFavoritesRepository
   }
 
   public async listByType(
-    type: 'characters' | 'comics',
+    type: string,
   ): Promise<UserFavorite[]> {
     const favorites = await this.ormRepository.find({ where: { type } });
 
