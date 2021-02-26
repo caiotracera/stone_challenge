@@ -39,6 +39,7 @@ export default class CreateUsersFavorites1614357287778
           {
             name: 'deleted_at',
             type: 'timestamp',
+            isNullable: true,
           },
         ],
       }),
