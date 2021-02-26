@@ -30,3 +30,5 @@ router.post(
 );
 
 router.delete('/:id', favoritesController.destroy);
+
+export default router;
