@@ -8,6 +8,10 @@ export const Container = styled.section`
   align-content: center;
 `
 
-export const LeftContainer = styled.div``
+export const LeftContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 
 export const RightContainer = styled.div``

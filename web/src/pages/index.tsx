@@ -1,6 +1,7 @@
 import Head from 'next/head'
 
 import Logo from '../assets/images/Logo.svg'
+import LoginBox from '../components/LoginBox'
 
 import { Container, LeftContainer, RightContainer } from '../styles/pages/index'
 
@@ -15,7 +16,9 @@ export default function Home() {
         <LeftContainer>
           <Logo />
         </LeftContainer>
-        <RightContainer></RightContainer>
+        <RightContainer>
+          <LoginBox />
+        </RightContainer>
       </Container>
     </div>
   )
