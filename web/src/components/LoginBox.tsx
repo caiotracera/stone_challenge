@@ -5,13 +5,13 @@ import { FormHandles } from '@unform/core'
 import { Form } from '@unform/web'
 import { FiMail, FiLock } from 'react-icons/fi'
 import * as Yup from 'yup'
+import { ToastContainer, toast } from 'react-toastify'
 
 import Input from '../components/Input'
 import Button from '../components/Button'
 import { Container, LinkContainer } from '../styles/components/LoginBox'
 import { AuthContext } from '../hooks/auth'
 import getValidationErrors from '../utils/getValidationErrors'
-import { useToast } from '../hooks/toast'
 
 type SignInFormData = {
   email: string
@@ -21,7 +21,6 @@ export default function LoginBox() {
   const { signIn, user } = useContext(AuthContext)
   const router = useRouter()
   const formRef = useRef<FormHandles>(null)
-  const { addToast } = useToast()
 
   useEffect(() => {
     if (user) {
@@ -53,17 +52,32 @@ export default function LoginBox() {
           return
         }
 
-        addToast({
-          type: 'error',
-          title: 'Sign in error',
-          description: 'Sign in failure, check your credentials'
+        toast.error(`${error.response.data.message}`, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined
         })
       }
     },
-    [addToast, router, signIn]
+    [toast, router, signIn]
   )
   return (
     <Container>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <strong>Olá :)</strong>
       <p>Preencha com seus dados para fazer login</p>
 
