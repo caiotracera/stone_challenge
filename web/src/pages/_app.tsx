@@ -1,14 +1,15 @@
 import { AppProps } from 'next/app'
 import GlobalStyle from '../styles/GlobalStyle'
+import 'react-toastify/dist/ReactToastify.css'
 
-import AppProvder from '../hooks'
+import AppProvider from '../hooks'
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
-    <AppProvder>
+    <AppProvider>
       <GlobalStyle />
       <Component {...pageProps} />
-    </AppProvder>
+    </AppProvider>
   )
 }
 
