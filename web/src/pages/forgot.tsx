@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Login - Marvel Stone</title>
+        <title>Esqueci minha senha - Marvel Stone</title>
       </Head>
 
       <Container>

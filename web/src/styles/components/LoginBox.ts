@@ -33,12 +33,14 @@ export const Container = styled.div`
 export const LinkContainer = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   margin-top: 16px;
+  font-size: 13px;
 
   span {
+    margin-left: 5px;
     font-weight: bold;
   }
 `
