@@ -6,7 +6,7 @@ import { FiMail, FiLock } from 'react-icons/fi'
 
 import Input from '../components/Input'
 import Button from '../components/Button'
-import { Container, LinkContainer } from '../styles/components/LoginBox'
+import { Container, LinkContainer } from '../styles/components/ForgotBox'
 
 export default function LoginBox() {
   const formRef = useRef<FormHandles>(null)
@@ -16,30 +16,22 @@ export default function LoginBox() {
   }, [])
   return (
     <Container>
-      <strong>Olá :)</strong>
-      <p>Preencha com seus dados para fazer login</p>
+      <strong>Recuperar senha</strong>
+      <p>
+        Coloque o e-mail associado a sua conta. Em até 5 minutos enviaremos um
+        e-mail com as instruções para alteração de senha.
+      </p>
 
       <Form ref={formRef} onSubmit={handleSubmit}>
         <Input autoFocus name="email" icon={FiMail} placeholder="E-mail" />
-        <Input
-          name="password"
-          icon={FiLock}
-          type="password"
-          placeholder="Password"
-        />
-
-        <LinkContainer>
-          <Link href="/forgot">Esqueceu sua senha?</Link>
-        </LinkContainer>
         <Button type="submit" style={{ marginTop: 16 }}>
-          Entrar
+          Enviar instruções
         </Button>
       </Form>
       <LinkContainer>
-        Ainda não tem conta?
-        <br />
+        Já tem uma conta?{' '}
         <span>
-          <Link href="/register">Cadastre-se!</Link>
+          <Link href="/">Faça login!</Link>
         </span>
       </LinkContainer>
     </Container>
