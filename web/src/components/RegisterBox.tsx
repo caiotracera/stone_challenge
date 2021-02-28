@@ -95,8 +95,6 @@ export default function RegisterBox() {
         draggable
         pauseOnHover
       />
-      {/* Same as */}
-      <ToastContainer />
 
       <strong>Cadastre-se</strong>
       <p>Preencha os dados e crie sua conta</p>
