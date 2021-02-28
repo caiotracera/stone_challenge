@@ -20,7 +20,8 @@
     "react-is": "^16.8.0",
     "react-spring": "^8.0.27",
     "styled-components": "^5.0.0",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
