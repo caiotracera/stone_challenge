@@ -8,7 +8,7 @@ import Input from '../components/Input'
 import Button from '../components/Button'
 import { Container, LinkContainer } from '../styles/components/ForgotBox'
 
-export default function LoginBox() {
+export default function ForgotBox() {
   const formRef = useRef<FormHandles>(null)
 
   const handleSubmit = useCallback(() => {
