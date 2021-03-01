@@ -6,7 +6,7 @@ import api from '../services/api'
 type User = {
   id: string
   email: string
-  name: string
+  username: string
   avatar_url: string
 }
 

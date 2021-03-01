@@ -18,15 +18,9 @@ type SignInFormData = {
   password: string
 }
 export default function LoginBox() {
-  const { signIn, user } = useContext(AuthContext)
+  const { signIn } = useContext(AuthContext)
   const router = useRouter()
   const formRef = useRef<FormHandles>(null)
-
-  useEffect(() => {
-    if (user) {
-      router.push('/recover')
-    }
-  }, [])
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
