@@ -65,6 +65,25 @@ $ git clone https://github.com/caiotracera/stone_challenge
 $ cd stone_challenge
 ```
 
+<b>Start the server</b><br />
+You must be running a Postgres and Redis docker and edit the `ormconfig.js` to connect to your database.
+
+```shell
+$ cd server
+$ yarn # or npm install
+$ yarn typeorm:migration run # or npm run typeorm:migration run
+$ yarn dev:server # or npm run dev:server
+```
+
+
+<b>Start the web</b><br />
+
+```shell
+$ cd web
+$ yarn # or npm install
+$ yarn dev # or npm run dev
+```
+
 # :pencil2: Todo
  - [ ] <b>Backend</b>
    - [x] Users
@@ -96,10 +115,12 @@ $ cd stone_challenge
    - [ ] Deploy
 <br /><br />
  - [ ] <b>Frontend</b>
-   - [ ] Design
+   - [x] Design
    - [ ] Implementations:
-     - [ ] Sign up
-     - [ ] Sign in
+     - [x] Sign up
+     - [x] Sign in
+     - [x] Forgot password
+     - [x] Reset password
      - [ ] Log out
      - [ ] Edit profile
      - [ ] List comics
