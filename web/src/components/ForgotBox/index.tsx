@@ -16,58 +16,61 @@ type ForgotFormData = {
   email: string;
 };
 
-export default function ForgotBox() {
+const ForgotBox: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
 
-  const handleSubmit = useCallback(async (data: ForgotFormData) => {
-    try {
-      formRef.current?.setErrors({});
+  const handleSubmit = useCallback(
+    async (data: ForgotFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .required('The email is required')
-          .email('The e-mail must be valid'),
-      });
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .required('The email is required')
+            .email('The e-mail must be valid'),
+        });
 
-      await schema.validate(data, { abortEarly: true });
+        await schema.validate(data, { abortEarly: true });
 
-      await api.post('/password/forgot', {
-        email: data.email,
-      });
+        await api.post('/password/forgot', {
+          email: data.email,
+        });
 
-      toast.success('Token enviado com sucesso!', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+        toast.success('Token enviado com sucesso!', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
 
-      setTimeout(() => {
-        history.push('/recover');
-      }, 5000);
-    } catch (error) {
-      if (error instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(error);
-        formRef.current?.setErrors(errors);
+        setTimeout(() => {
+          history.push('/recover');
+        }, 5000);
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
+          formRef.current?.setErrors(errors);
 
-        return;
+          return;
+        }
+
+        toast.error(`${error.response.data.message}`, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
-
-      toast.error(`${error.response.data.message}`, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    }
-  }, []);
+    },
+    [history],
+  );
   return (
     <Container>
       <ToastContainer
@@ -101,4 +104,6 @@ export default function ForgotBox() {
       </LinkContainer>
     </Container>
   );
-}
+};
+
+export default ForgotBox;
