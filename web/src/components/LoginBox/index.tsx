@@ -17,7 +17,8 @@ type SignInFormData = {
   email: string;
   password: string;
 };
-export default function LoginBox() {
+
+const LoginBox: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
 
@@ -35,7 +36,7 @@ export default function LoginBox() {
           password: Yup.string().required('Password is required'),
         });
 
-        await schema.validate(data, { abortEarly: true });
+        await schema.validate(data, { abortEarly: false });
 
         await signIn({ email: data.email, password: data.password });
         history.push('/dashboard');
@@ -101,4 +102,6 @@ export default function LoginBox() {
       </LinkContainer>
     </Container>
   );
-}
+};
+
+export default LoginBox;
