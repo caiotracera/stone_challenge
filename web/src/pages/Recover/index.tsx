@@ -8,7 +8,7 @@ const Recover: React.FC = () => {
     <div className="container">
       <Container>
         <LeftContainer>
-          <Logo />
+          <img src={Logo} alt="Logo" />
         </LeftContainer>
         <RightContainer>
           <RecoverBox />
