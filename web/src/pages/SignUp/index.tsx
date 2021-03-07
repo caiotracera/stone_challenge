@@ -3,7 +3,7 @@ import RegisterBox from '../../components/RegisterBox';
 
 import { Container, LeftContainer, RightContainer } from './styles';
 
-export default function Register() {
+const SignUp: React.FC = () => {
   return (
     <div className="container">
       <Container>
@@ -16,4 +16,6 @@ export default function Register() {
       </Container>
     </div>
   );
-}
+};
+
+export default SignUp;
