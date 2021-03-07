@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { FiHash, FiLock } from 'react-icons/fi';
@@ -21,6 +21,7 @@ type RecoverFormData = {
 const RecoverBox: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
+  const { search } = useLocation();
 
   const handleSubmit = useCallback(
     async (data: RecoverFormData) => {
@@ -94,7 +95,14 @@ const RecoverBox: React.FC = () => {
       <strong>Criar nova senha</strong>
 
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <Input autoFocus name="token" icon={FiHash} placeholder="Token" />
+        <Input
+          autoFocus
+          name="token"
+          icon={FiHash}
+          placeholder="Token"
+          value={search.split('token=')[1]}
+          disabled
+        />
         <Input
           type="password"
           name="password"
