@@ -77,9 +77,13 @@ export const SelectedCharacterContainer = styled.div`
   margin-left: 2.5rem;
   overflow-y: auto;
 
-  p.title {
+  h3.title {
     font-size: 24px;
     margin-bottom: 1.5rem;
+  }
+
+  p.description {
+    margin-bottom: 2.5rem;
   }
 
   img {
@@ -121,6 +125,10 @@ export const PaginationContainer = styled.div`
       cursor: pointer;
       background: var(--white);
       color: var(--background);
+    }
+
+    &.currentPage {
+      width: 150px;
     }
   }
 `;

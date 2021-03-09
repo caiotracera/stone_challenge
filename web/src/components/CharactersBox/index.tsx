@@ -31,6 +31,7 @@ type IComicData = {
 type ICharacterData = {
   id: number;
   name: string;
+  description: string;
   comics: IComicData[];
   thumbnail: {
     path: string;
@@ -45,20 +46,22 @@ type IFavoriteData = {
 
 const CharactersBox: React.FC = () => {
   const [characters, setCharacters] = useState<IRequestData[]>();
-  const [selectedCharacter, setSelectedCharacter] = useState<ICharacterData>();
   const [favorites, setFavorites] = useState<IFavoriteData[]>();
+  const [pagination, setPagination] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleSelectedCharacter = useCallback(async (character_id: number) => {
     const response = await axios.get(
       `https://gateway.marvel.com:443/v1/public/characters/${character_id}?apikey=cde83a3d3993109b972960f7ba6dee7a&hash=1d08a42f328a29f054d36a1187ca314b&ts=1614357839`,
     );
 
-    setSelectedCharacter({
-      id: response.data.data.results[0].id,
-      name: response.data.data.results[0].name,
-      comics: response.data.data.results[0].comics.items,
-      thumbnail: response.data.data.results[0].thumbnail,
-    });
+    // setSelectedCharacter({
+    //   id: response.data.data.results[0].id,
+    //   name: response.data.data.results[0].name,
+    //   description: response.data.data.results[0].description,
+    //   comics: response.data.data.results[0].comics.items,
+    //   thumbnail: response.data.data.results[0].thumbnail,
+    // });
   }, []);
 
   const handleFavorite = useCallback(
@@ -89,25 +92,38 @@ const CharactersBox: React.FC = () => {
     [favorites],
   );
 
+  const increasePage = useCallback(() => {
+    if (currentPage < pagination) {
+      setCurrentPage(currentPage + 1);
+    }
+  }, [currentPage, pagination]);
+
+  const decreasePage = useCallback(() => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }, [currentPage]);
+
   useEffect(() => {
     axios
       .get(
         'https://gateway.marvel.com:443/v1/public/characters?apikey=cde83a3d3993109b972960f7ba6dee7a&hash=1d08a42f328a29f054d36a1187ca314b&ts=1614357839',
         {
           params: {
-            limit: 21,
-            offset: 1380,
+            limit: 30,
+            offset: (currentPage - 1) * 30,
           },
         },
       )
       .then(response => {
+        setPagination(Math.ceil(response.data.data.total / 30));
         setCharacters(response.data.data.results);
       });
 
     api
       .get(`me/favorites/character`)
       .then(response => setFavorites(response.data));
-  }, []);
+  }, [currentPage]);
 
   return (
     <Container>
@@ -143,38 +159,11 @@ const CharactersBox: React.FC = () => {
               ))}
           </CharactersContainer>
           <PaginationContainer>
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>...</div>
-            <div>999</div>
+            <div onClick={decreasePage}>-</div>
+            <div className="currentPage">{`Página ${currentPage} de ${pagination}`}</div>
+            <div onClick={increasePage}>+</div>
           </PaginationContainer>
         </div>
-        <SelectedCharacterContainer>
-          {selectedCharacter ? (
-            <>
-              <img
-                src={`${selectedCharacter.thumbnail.path}.${selectedCharacter.thumbnail.extension}`}
-                alt="char"
-              />
-              <p className="title">{selectedCharacter.name}</p>
-              {selectedCharacter.comics.length === 0 ? (
-                <b>Nenhuma comics associada a esse personagem</b>
-              ) : (
-                <>
-                  Comics:
-                  <ul>
-                    {selectedCharacter.comics.map(comic => (
-                      <li key={comic.name}>{comic.name}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </>
-          ) : (
-            <h2>Selecione um personagem</h2>
-          )}
-        </SelectedCharacterContainer>
       </Content>
     </Container>
   );
