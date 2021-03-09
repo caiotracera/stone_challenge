@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useCallback } from 'react';
+import { useHistory, NavLink } from 'react-router-dom';
 import { FiBookOpen, FiLogOut, FiUser } from 'react-icons/fi';
 import { AiFillStar } from 'react-icons/all';
 
@@ -9,7 +9,6 @@ import { useAuth } from '../../hooks/auth';
 import { Container, Navbar, Footer } from './styles';
 
 const Sidebar: React.FC = () => {
-  const [activeRoute, setActiveRoute] = useState('dashboard');
   const { user, signOut } = useAuth();
   const history = useHistory();
 
@@ -17,35 +16,22 @@ const Sidebar: React.FC = () => {
     history.push('/profile');
   }, [history]);
 
-  const handleChangeView = useCallback((route: string) => {
-    setActiveRoute(route);
-  }, []);
-
   return (
     <Container>
       <img src={logoImg} alt="Logo" className="logo" />
       <Navbar>
-        <div
-          className={activeRoute === 'dashboard' ? 'active' : ''}
-          onClick={() => handleChangeView('dashboard')}
-        >
+        <NavLink to="/dashboard/characters" activeClassName="active">
           <FiUser size={24} color="#fff" />
           <p>Characters</p>
-        </div>
-        <div
-          className={activeRoute === 'comics' ? 'active' : ''}
-          onClick={() => handleChangeView('comics')}
-        >
+        </NavLink>
+        <NavLink to="/dashboard/comics" activeClassName="active">
           <FiBookOpen size={24} color="#fff" />
           <p>Comics</p>
-        </div>
-        <div
-          className={activeRoute === 'favorites' ? 'active' : ''}
-          onClick={() => handleChangeView('favorites')}
-        >
+        </NavLink>
+        <NavLink to="/dashboard/favorites" activeClassName="active">
           <AiFillStar size={24} color="#fff" />
           <p>Favorites</p>
-        </div>
+        </NavLink>
       </Navbar>
       <Footer>
         <img src={user.avatar_url} alt="avatar" onClick={handleProfileClick} />

@@ -1,38 +1,23 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-
 import { FaHeart, FiHeart } from 'react-icons/all';
+import { useHistory } from 'react-router-dom';
+
+import api from '../../services/api';
+
 import {
   Container,
   CharactersContainer,
   Character,
   FavContainer,
   Content,
-  SelectedCharacterContainer,
   PaginationContainer,
 } from './styles';
-import api from '../../services/api';
 
 type IRequestData = {
   id: number;
   name: string;
   isFav: boolean;
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
-};
-
-type IComicData = {
-  resourceURI: string;
-  name: string;
-};
-
-type ICharacterData = {
-  id: number;
-  name: string;
-  description: string;
-  comics: IComicData[];
   thumbnail: {
     path: string;
     extension: string;
@@ -50,19 +35,14 @@ const CharactersBox: React.FC = () => {
   const [pagination, setPagination] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handleSelectedCharacter = useCallback(async (character_id: number) => {
-    const response = await axios.get(
-      `https://gateway.marvel.com:443/v1/public/characters/${character_id}?apikey=cde83a3d3993109b972960f7ba6dee7a&hash=1d08a42f328a29f054d36a1187ca314b&ts=1614357839`,
-    );
+  const history = useHistory();
 
-    // setSelectedCharacter({
-    //   id: response.data.data.results[0].id,
-    //   name: response.data.data.results[0].name,
-    //   description: response.data.data.results[0].description,
-    //   comics: response.data.data.results[0].comics.items,
-    //   thumbnail: response.data.data.results[0].thumbnail,
-    // });
-  }, []);
+  const handleSelectedCharacter = useCallback(
+    async (character_id: number) => {
+      history.push(`/dashboard/characters/${character_id}`);
+    },
+    [history],
+  );
 
   const handleFavorite = useCallback(
     async (character_id: number) => {

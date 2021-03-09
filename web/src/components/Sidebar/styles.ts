@@ -23,7 +23,7 @@ export const Navbar = styled.nav`
   align-items: center;
   justify-content: center;
 
-  div {
+  a {
     cursor: pointer;
     width: 90%;
     height: 56px;

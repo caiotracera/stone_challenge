@@ -50,7 +50,6 @@ export const Character = styled.div`
 
 export const FavContainer = styled.div`
   position: absolute;
-  height: 24px;
 
   top: 5px;
   right: 5px;
