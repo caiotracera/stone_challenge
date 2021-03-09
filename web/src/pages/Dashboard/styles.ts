@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  width: 100vh;
+  width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -11,6 +11,7 @@ export const Container = styled.div`
 export const Sidebar = styled.div`
   height: 100vh;
   width: 10vw;
+  position: fixed;
 
   display: flex;
   flex-direction: column;
@@ -80,4 +81,10 @@ export const Footer = styled.div`
   &:hover {
     background: ${darken(0.05, '#d71414')};
   }
+`;
+
+export const Content = styled.div`
+  margin-left: 10vw;
+  width: 90vw;
+  max-height: 100vh;
 `;

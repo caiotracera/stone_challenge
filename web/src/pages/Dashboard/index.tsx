@@ -1,12 +1,14 @@
 import React, { useCallback, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { FiBookOpen, FiLogOut, FiUser } from 'react-icons/fi';
-import { useHistory, useParams, Link } from 'react-router-dom';
-
 import { AiFillStar } from 'react-icons/all';
-import logoImg from '../../assets/images/logo.svg';
 
-import { Container, Sidebar, Navbar, Footer } from './styles';
+import CharactersBox from '../../components/CharactersBox';
+
+import logoImg from '../../assets/images/logo.svg';
 import { useAuth } from '../../hooks/auth';
+
+import { Container, Sidebar, Navbar, Footer, Content } from './styles';
 
 const Dashboard: React.FC = () => {
   const [activeRoute, setActiveRoute] = useState('dashboard');
@@ -58,7 +60,9 @@ const Dashboard: React.FC = () => {
           <FiLogOut size={16} onClick={signOut} />
         </Footer>
       </Sidebar>
-      <h1>hello world</h1>
+      <Content>
+        <CharactersBox />
+      </Content>
     </Container>
   );
 };
