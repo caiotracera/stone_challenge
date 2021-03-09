@@ -7,8 +7,8 @@ import api from '../../services/api';
 
 import {
   Container,
-  CharactersContainer,
-  Character,
+  ComicsContainer,
+  Comic,
   FavContainer,
   Content,
   PaginationContainer,
@@ -16,7 +16,7 @@ import {
 
 type IRequestData = {
   id: number;
-  name: string;
+  title: string;
   isFav: boolean;
   thumbnail: {
     path: string;
@@ -29,25 +29,25 @@ type IFavoriteData = {
   favorite_id: number;
 };
 
-const CharactersBox: React.FC = () => {
-  const [characters, setCharacters] = useState<IRequestData[]>();
+const ComicsBox: React.FC = () => {
+  const [comics, setComics] = useState<IRequestData[]>();
   const [favorites, setFavorites] = useState<IFavoriteData[]>();
   const [pagination, setPagination] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
   const history = useHistory();
 
-  const handleSelectedCharacter = useCallback(
-    async (character_id: number) => {
-      history.push(`/dashboard/characters/${character_id}`);
+  const handleSelectedComic = useCallback(
+    async (comic_id: number) => {
+      history.push(`/dashboard/comics/${comic_id}`);
     },
     [history],
   );
 
   const handleFavorite = useCallback(
-    async (character_id: number) => {
+    async (comic_id: number) => {
       const isFavorite = favorites?.find(
-        eachFavorite => eachFavorite.favorite_id === character_id,
+        eachFavorite => eachFavorite.favorite_id === comic_id,
       );
 
       if (isFavorite) {
@@ -61,12 +61,12 @@ const CharactersBox: React.FC = () => {
       }
 
       await api.post<IFavoriteData>(`me/favorites`, {
-        favorite_id: character_id,
-        type: 'character',
+        favorite_id: comic_id,
+        type: 'comics',
       });
 
       api
-        .get(`me/favorites/character`)
+        .get(`me/favorites/comics`)
         .then(response => setFavorites(response.data));
     },
     [favorites],
@@ -87,59 +87,59 @@ const CharactersBox: React.FC = () => {
   useEffect(() => {
     axios
       .get(
-        'https://gateway.marvel.com:443/v1/public/characters?apikey=cde83a3d3993109b972960f7ba6dee7a&hash=1d08a42f328a29f054d36a1187ca314b&ts=1614357839',
+        'https://gateway.marvel.com:443/v1/public/comics?apikey=cde83a3d3993109b972960f7ba6dee7a&hash=1d08a42f328a29f054d36a1187ca314b&ts=1614357839',
         {
           params: {
-            limit: 30,
-            offset: (currentPage - 1) * 30,
+            limit: 27,
+            offset: (currentPage - 1) * 27,
           },
         },
       )
       .then(response => {
-        setPagination(Math.ceil(response.data.data.total / 30));
-        setCharacters(response.data.data.results);
+        setPagination(Math.ceil(response.data.data.total / 27));
+        setComics(response.data.data.results);
       });
 
     api
-      .get(`me/favorites/character`)
+      .get(`me/favorites/comics`)
       .then(response => setFavorites(response.data));
   }, [currentPage]);
 
   return (
     <Container>
-      <h2>Characters</h2>
+      <h2>Comics</h2>
       <Content>
         <div id="content">
-          <CharactersContainer>
-            {characters &&
-              characters.map(character => (
-                <Character key={character.id}>
+          <ComicsContainer>
+            {comics &&
+              comics.map(comic => (
+                <Comic key={comic.id}>
                   <div
                     className="clickable"
                     onClick={() => {
-                      handleSelectedCharacter(character.id);
+                      handleSelectedComic(comic.id);
                     }}
                   >
                     <img
-                      src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-                      alt="char"
+                      src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                      alt="comic"
                     />
 
-                    <p>{character.name}</p>
+                    <p>{comic.title}</p>
                   </div>
 
-                  <FavContainer onClick={() => handleFavorite(character.id)}>
+                  <FavContainer onClick={() => handleFavorite(comic.id)}>
                     {favorites?.find(
-                      eachFavorite => eachFavorite.favorite_id === character.id,
+                      eachFavorite => eachFavorite.favorite_id === comic.id,
                     ) ? (
                       <FaHeart size={24} color="e83f5b" />
                     ) : (
                       <FiHeart size={24} color="e83f5b" />
                     )}
                   </FavContainer>
-                </Character>
+                </Comic>
               ))}
-          </CharactersContainer>
+          </ComicsContainer>
           <PaginationContainer>
             <div onClick={decreasePage}>-</div>
             <div className="currentPage">{`Página ${currentPage} de ${pagination}`}</div>
@@ -151,4 +151,4 @@ const CharactersBox: React.FC = () => {
   );
 };
 
-export default CharactersBox;
+export default ComicsBox;
