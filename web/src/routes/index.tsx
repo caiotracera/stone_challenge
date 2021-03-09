@@ -10,6 +10,7 @@ import Recover from '../pages/Recover';
 import Dashboard from '../pages/Dashboard';
 import CharacterDetail from '../pages/CharacterDetail';
 import Comics from '../pages/Comics';
+import ComicDetail from '../pages/ComicDetail';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -27,11 +28,7 @@ const Routes: React.FC = () => (
     />
 
     <Route path="/dashboard/comics" exact isPrivate component={Comics} />
-    <Route
-      path="/dashboard/characters/:id"
-      isPrivate
-      component={CharacterDetail}
-    />
+    <Route path="/dashboard/comics/:id" isPrivate component={ComicDetail} />
   </Switch>
 );
 
