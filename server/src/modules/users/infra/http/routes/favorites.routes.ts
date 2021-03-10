@@ -24,6 +24,8 @@ router.post(
     [Segments.BODY]: {
       favorite_id: Joi.number().required(),
       type: Joi.string().required(),
+      name: Joi.string().required(),
+      avatar_url: Joi.string().required(),
     },
   }),
   favoritesController.create,

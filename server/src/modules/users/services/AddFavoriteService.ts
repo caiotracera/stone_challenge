@@ -9,6 +9,8 @@ import UserFavorite from '@modules/users/infra/typeorm/entities/UserFavorite';
 type IRequest = {
   favorite_id: number;
   user_id: string;
+  name: string;
+  avatar_url: string;
   type: string;
 };
 
@@ -29,6 +31,8 @@ export default class AddFavoriteService {
     favorite_id,
     user_id,
     type,
+    name,
+    avatar_url,
   }: IRequest): Promise<UserFavorite> {
     const user = await this.usersRepository.findById(user_id);
     if (!user) {
@@ -39,6 +43,8 @@ export default class AddFavoriteService {
       favorite_id,
       user_id,
       type,
+      name,
+      avatar_url,
     });
 
     await this.cacheProvider.invalidate(`favorites-${type}-${user_id}`);

@@ -34,6 +34,8 @@ describe('DeleteFavorite', () => {
       user_id: user.id,
       favorite_id: 14785785,
       type: 'characters',
+      name: 'Lorem Ipsum',
+      avatar_url: 'lorem.ipsum.com',
     });
 
     await deleteFavoriteService.execute({
@@ -53,6 +55,8 @@ describe('DeleteFavorite', () => {
       user_id: 'random_user_id',
       favorite_id: 14785785,
       type: 'characters',
+      name: 'Lorem Ipsum',
+      avatar_url: 'lorem.ipsum.com',
     });
 
     await expect(
@@ -88,6 +92,8 @@ describe('DeleteFavorite', () => {
       user_id: 'random_user_id',
       favorite_id: 14785785,
       type: 'characters',
+      name: 'Lorem Ipsum',
+      avatar_url: 'lorem.ipsum.com',
     });
 
     await expect(

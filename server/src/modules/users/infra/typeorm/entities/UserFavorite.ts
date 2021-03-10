@@ -23,6 +23,12 @@ export default class UserFavorites {
   user: User;
 
   @Column()
+  name: string;
+
+  @Column()
+  avatar_url: string;
+
+  @Column()
   favorite_id: number;
 
   @Column()

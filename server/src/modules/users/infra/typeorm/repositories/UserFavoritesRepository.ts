@@ -14,11 +14,22 @@ export default class UserFavoritesRepository
 
   public async add({
     favorite_id,
+    name,
+    avatar_url,
     type,
     user_id,
   }: IAddFavoriteDTO): Promise<UserFavorite> {
+    console.log({
+      favorite_id,
+      name,
+      avatar_url,
+      type,
+      user_id,
+    });
     const favorite = this.ormRepository.create({
       favorite_id,
+      name,
+      avatar_url,
       type,
       user_id,
     });

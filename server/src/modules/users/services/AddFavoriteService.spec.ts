@@ -34,6 +34,8 @@ describe('AddFavorite', () => {
       user_id: user.id,
       favorite_id: 14785785,
       type: 'characters',
+      name: 'Lorem Ipsum',
+      avatar_url: 'lorem.ipsum.com',
     });
 
     expect(favorite).toHaveProperty('id');
@@ -46,6 +48,8 @@ describe('AddFavorite', () => {
         user_id: 'invalid_id',
         favorite_id: 14785785,
         type: 'characters',
+        name: 'Lorem Ipsum',
+        avatar_url: 'lorem.ipsum.com',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

@@ -8,6 +8,8 @@ import ListFavoritesByTypeService from '@modules/users/services/ListFavoritesByT
 type ICreateBody = {
   favorite_id: number;
   type: string;
+  name: string;
+  avatar_url: string;
 };
 
 export default class FavoritesController {
@@ -25,7 +27,7 @@ export default class FavoritesController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { favorite_id, type } = request.body as ICreateBody;
+    const { favorite_id, type, name, avatar_url } = request.body as ICreateBody;
 
     const addFavoriteService = container.resolve(AddFavoriteService);
 
@@ -33,6 +35,8 @@ export default class FavoritesController {
       favorite_id,
       type,
       user_id: request.user.id,
+      name,
+      avatar_url,
     });
 
     return response.status(201).json(favorite);

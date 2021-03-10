@@ -10,6 +10,8 @@ export default class FakeUserFavoritesRepository
 
   public async add({
     favorite_id,
+    name,
+    avatar_url,
     type,
     user_id,
   }: IAddFavoriteDTO): Promise<UserFavorite> {
@@ -18,6 +20,8 @@ export default class FakeUserFavoritesRepository
     Object.assign(favorite, {
       id: uuid(),
       user_id,
+      name,
+      avatar_url,
       type,
       favorite_id,
     });
@@ -34,9 +38,7 @@ export default class FakeUserFavoritesRepository
     this.favorites.splice(favoriteIndex, 1);
   }
 
-  public async listByType(
-    type: string,
-  ): Promise<UserFavorite[]> {
+  public async listByType(type: string): Promise<UserFavorite[]> {
     const favoritesList: UserFavorite[] = [];
 
     this.favorites.forEach(favorite => {

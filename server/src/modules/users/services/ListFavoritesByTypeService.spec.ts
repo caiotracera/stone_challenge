@@ -34,36 +34,48 @@ describe('ListFavoritesByType', () => {
       user_id: user.id,
       type: 'characters',
       favorite_id: 1,
+      name: 'Lorem Ipsum',
+      avatar_url: 'lorem.ipsum.com',
     });
 
     const charTwo = await fakeUserFavoritesRepository.add({
       user_id: user.id,
       type: 'characters',
       favorite_id: 2,
+      name: 'Lorem Ipsum',
+      avatar_url: 'lorem.ipsum.com',
     });
 
     const charThree = await fakeUserFavoritesRepository.add({
       user_id: user.id,
       type: 'characters',
       favorite_id: 3,
+      name: 'Lorem Ipsum',
+      avatar_url: 'lorem.ipsum.com',
     });
 
     const comicOne = await fakeUserFavoritesRepository.add({
       user_id: user.id,
       type: 'comics',
       favorite_id: 1,
+      name: 'Lorem Ipsum',
+      avatar_url: 'lorem.ipsum.com',
     });
 
     const comicTwo = await fakeUserFavoritesRepository.add({
       user_id: user.id,
       type: 'comics',
       favorite_id: 2,
+      name: 'Lorem Ipsum',
+      avatar_url: 'lorem.ipsum.com',
     });
 
     const comicThree = await fakeUserFavoritesRepository.add({
       user_id: user.id,
       type: 'comics',
       favorite_id: 3,
+      name: 'Lorem Ipsum',
+      avatar_url: 'lorem.ipsum.com',
     });
 
     const charactersFavorites = await listFavoritesByTypeService.execute({
