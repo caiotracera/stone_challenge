@@ -23,6 +23,14 @@ export default class CreateUsersFavorites1614357287778
             type: 'integer',
           },
           {
+            name: 'name',
+            type: 'varchar',
+          },
+          {
+            name: 'avatar_url',
+            type: 'varchar',
+          },
+          {
             name: 'type',
             type: 'varchar',
           },
