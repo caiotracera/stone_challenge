@@ -31,9 +31,7 @@ export default class UserFavoritesRepository
     await this.ormRepository.softDelete({ id });
   }
 
-  public async listByType(
-    type: string,
-  ): Promise<UserFavorite[]> {
+  public async listByType(type: string): Promise<UserFavorite[]> {
     const favorites = await this.ormRepository.find({ where: { type } });
 
     return favorites;
