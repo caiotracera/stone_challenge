@@ -11,6 +11,7 @@ import Dashboard from '../pages/Dashboard';
 import CharacterDetail from '../pages/CharacterDetail';
 import Comics from '../pages/Comics';
 import ComicDetail from '../pages/ComicDetail';
+import Favorites from '../pages/Favorites';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -29,6 +30,8 @@ const Routes: React.FC = () => (
 
     <Route path="/dashboard/comics" exact isPrivate component={Comics} />
     <Route path="/dashboard/comics/:id" isPrivate component={ComicDetail} />
+
+    <Route path="/dashboard/favorites" isPrivate component={Favorites} />
   </Switch>
 );
 
