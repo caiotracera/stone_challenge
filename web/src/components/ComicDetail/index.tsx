@@ -2,7 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { Container, ComicContainer } from './styles';
+import { FaHeart } from 'react-icons/fa';
+import { FiHeart } from 'react-icons/fi';
+import { Container, ComicContainer, FavoriteContainer } from './styles';
+import api from '../../services/api';
 
 type ICharacterData = {
   name: string;
@@ -23,8 +26,18 @@ type IComicData = {
 type IComicParam = {
   id: string;
 };
+
+type IFavoriteData = {
+  id: string;
+  favorite_id: number;
+  name: string;
+  avatar_url: string;
+  type: string;
+};
+
 const ComicDetailContainer: React.FC = () => {
   const [selectedComic, setSelectedComic] = useState<IComicData>();
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const params = useParams<IComicParam>();
   const history = useHistory();
@@ -36,6 +49,25 @@ const ComicDetailContainer: React.FC = () => {
     },
     [history],
   );
+
+  const handleIsFavorite = useCallback(async () => {
+    if (selectedComic) {
+      if (isFavorite) {
+        const favorite = await api.get(`me/favorites/${selectedComic.id}/find`);
+        await api.delete(`me/favorites/${favorite.data.id}`);
+        setIsFavorite(false);
+        return;
+      }
+
+      await api.post<IFavoriteData>(`me/favorites`, {
+        favorite_id: selectedComic.id,
+        name: selectedComic.title,
+        avatar_url: `${selectedComic.thumbnail.path}.${selectedComic.thumbnail.extension}`,
+        type: 'characters',
+      });
+      setIsFavorite(true);
+    }
+  }, [isFavorite, selectedComic]);
 
   useEffect(() => {
     axios
@@ -63,7 +95,23 @@ const ComicDetailContainer: React.FC = () => {
           />
           <h1>{selectedComic.title}</h1>
 
-          <p>{selectedComic.description}</p>
+          <FavoriteContainer>
+            <button type="button" onClick={handleIsFavorite}>
+              {isFavorite ? (
+                <>
+                  <FaHeart size={24} color="e83f5b" />
+                  Remover dos favoritos
+                </>
+              ) : (
+                <>
+                  <FiHeart size={24} color="e83f5b" />
+                  Adicionar aos favorites
+                </>
+              )}
+            </button>
+          </FavoriteContainer>
+
+          <p className="description">{selectedComic.description}</p>
 
           <ul>
             Personagens:
