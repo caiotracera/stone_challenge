@@ -6,4 +6,5 @@ export default interface IUserFavoritesRepository {
   delete(id: string): Promise<void>;
   listByType(type: string): Promise<UserFavorite[]>;
   findById(id: string): Promise<UserFavorite | undefined>;
+  findByFavoriteId(favorite_id: number): Promise<UserFavorite | undefined>;
 }

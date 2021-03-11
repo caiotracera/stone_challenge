@@ -45,4 +45,14 @@ export default class UserFavoritesRepository
     const favorite = await this.ormRepository.findOne({ id });
     return favorite;
   }
+
+  public async findByFavoriteId(
+    favorite_id: number,
+  ): Promise<UserFavorite | undefined> {
+    const favorite = await this.ormRepository.findOne({
+      where: { favorite_id },
+    });
+
+    return favorite;
+  }
 }
