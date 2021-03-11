@@ -18,6 +18,16 @@ router.get(
   favoritesController.index,
 );
 
+router.get(
+  '/:favorite_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      favorite_id: Joi.number().required(),
+    },
+  }),
+  favoritesController.show,
+);
+
 router.post(
   '/',
   celebrate({

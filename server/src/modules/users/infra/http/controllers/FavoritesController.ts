@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import AddFavoriteService from '@modules/users/services/AddFavoriteService';
 import DeleteFavoriteService from '@modules/users/services/DeleteFavoriteService';
 import ListFavoritesByTypeService from '@modules/users/services/ListFavoritesByTypeService';
+import FindFavoriteByFavoriteId from '@modules/users/services/FindFavoriteByFavoriteIdService';
 
 type ICreateBody = {
   favorite_id: number;
@@ -24,6 +25,19 @@ export default class FavoritesController {
     });
 
     return response.status(200).json(favorites);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const findFavoriteByFavoriteId = container.resolve(
+      FindFavoriteByFavoriteId,
+    );
+
+    const favorite = await findFavoriteByFavoriteId.execute({
+      user_id: request.user.id,
+      favorite_id: Number(request.params.favorite_id),
+    });
+
+    return response.status(200).json(favorite);
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
