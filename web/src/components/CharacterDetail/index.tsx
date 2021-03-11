@@ -67,14 +67,20 @@ const CharacterDetailContainer: React.FC = () => {
 
           <ul className="comics">
             <p>Comics:</p>
-            {selectedCharacter.comics.map(comic => (
-              <li
-                onClick={() => handleSelectComic(comic.resourceURI)}
-                key={comic.name}
-              >
-                {comic.name}
-              </li>
-            ))}
+            {selectedCharacter.comics.length === 0 ? (
+              <p>Nenhuma comic registrada</p>
+            ) : (
+              <>
+                {selectedCharacter.comics.map(comic => (
+                  <li
+                    onClick={() => handleSelectComic(comic.resourceURI)}
+                    key={comic.name}
+                  >
+                    {comic.name}
+                  </li>
+                ))}
+              </>
+            )}
           </ul>
         </CharacterContainer>
       )}
