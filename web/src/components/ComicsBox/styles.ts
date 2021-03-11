@@ -64,37 +64,6 @@ export const Content = styled.div`
   justify-content: center;
 `;
 
-export const SelectedCharacterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 30%;
-  height: 100%;
-
-  margin-left: 2.5rem;
-  overflow-y: auto;
-
-  h3.title {
-    font-size: 24px;
-    margin-bottom: 1.5rem;
-  }
-
-  p.description {
-    margin-bottom: 2.5rem;
-  }
-
-  img {
-    width: 70%;
-    margin-bottom: 2rem;
-  }
-
-  ul {
-    list-style: none;
-  }
-`;
-
 export const PaginationContainer = styled.div`
   display: flex;
   align-items: center;

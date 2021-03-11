@@ -63,11 +63,11 @@ const CharactersBox: React.FC = () => {
         favorite_id: character.id,
         name: character.name,
         avatar_url: `${character.thumbnail.path}.${character.thumbnail.extension}`,
-        type: 'character',
+        type: 'characters',
       });
 
       api
-        .get(`me/favorites/character`)
+        .get(`me/favorites/characters`)
         .then(response => setFavorites(response.data));
     },
     [favorites],
@@ -102,7 +102,7 @@ const CharactersBox: React.FC = () => {
       });
 
     api
-      .get(`me/favorites/character`)
+      .get(`me/favorites/characters`)
       .then(response => setFavorites(response.data));
   }, [currentPage]);
 

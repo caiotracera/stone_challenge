@@ -43,7 +43,6 @@ const ComicDetailContainer: React.FC = () => {
         `https://gateway.marvel.com:443/v1/public/comics/${params.id}?apikey=cde83a3d3993109b972960f7ba6dee7a&hash=1d08a42f328a29f054d36a1187ca314b&ts=1614357839`,
       )
       .then(response => {
-        console.log(response.data.data.results[0]);
         setSelectedComic({
           id: response.data.data.results[0].id,
           characters: response.data.data.results[0].characters.items,

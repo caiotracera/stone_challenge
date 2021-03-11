@@ -10,7 +10,7 @@ export const Container = styled.div`
   color: #fff;
 
   h2 {
-    margin-bottom: 3.5rem;
+    margin-bottom: 1.5rem;
   }
 
   div#content {
@@ -21,16 +21,16 @@ export const Container = styled.div`
   }
 `;
 
-export const ComicsContainer = styled.div`
+export const FavoritesContainer = styled.div`
   width: 100%;
   height: 100%;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
   grid-gap: 20px;
 `;
 
-export const Comic = styled.div`
+export const Favorite = styled.div`
   cursor: pointer;
   border: 2px solid white;
   display: flex;
@@ -48,7 +48,7 @@ export const Comic = styled.div`
   }
 `;
 
-export const FavContainer = styled.div`
+export const FavIconContainer = styled.div`
   position: absolute;
 
   top: 5px;
@@ -62,72 +62,6 @@ export const Content = styled.div`
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-`;
 
-export const SelectedCharacterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 30%;
-  height: 100%;
-
-  margin-left: 2.5rem;
-  overflow-y: auto;
-
-  h3.title {
-    font-size: 24px;
-    margin-bottom: 1.5rem;
-  }
-
-  p.description {
-    margin-bottom: 2.5rem;
-  }
-
-  img {
-    width: 70%;
-    margin-bottom: 2rem;
-  }
-
-  ul {
-    list-style: none;
-  }
-`;
-
-export const PaginationContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-top: 5.5rem;
-
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 45px;
-    height: 45px;
-
-    background: var(--background);
-    border: 1px solid #fff;
-    border-radius: 4px;
-
-    transition: all 0.2s;
-
-    & + div {
-      margin-left: 1rem;
-    }
-
-    &:hover {
-      cursor: pointer;
-      background: var(--white);
-      color: var(--background);
-    }
-
-    &.currentPage {
-      width: 150px;
-    }
-  }
+  margin-bottom: 3.5rem;
 `;
