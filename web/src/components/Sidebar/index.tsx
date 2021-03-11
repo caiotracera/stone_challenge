@@ -13,7 +13,7 @@ const Sidebar: React.FC = () => {
   const history = useHistory();
 
   const handleProfileClick = useCallback(() => {
-    history.push('/profile');
+    history.push('profile');
   }, [history]);
 
   return (
