@@ -45,23 +45,24 @@ const CharactersBox: React.FC = () => {
   );
 
   const handleFavorite = useCallback(
-    async (character_id: number) => {
+    async (character: IRequestData) => {
       const isFavorite = favorites?.find(
-        eachFavorite => eachFavorite.favorite_id === character_id,
+        eachFavorite => eachFavorite.favorite_id === character.id,
       );
 
       if (isFavorite) {
         await api.delete(`me/favorites/${isFavorite.id}`);
-        const filteredFavorites = favorites?.filter(
-          eachFavorite => eachFavorite.id !== isFavorite.id,
-        );
 
-        setFavorites(filteredFavorites);
+        setFavorites(
+          favorites?.filter(eachFavorite => eachFavorite.id !== isFavorite.id),
+        );
         return;
       }
 
       await api.post<IFavoriteData>(`me/favorites`, {
-        favorite_id: character_id,
+        favorite_id: character.id,
+        name: character.name,
+        avatar_url: `${character.thumbnail.path}.${character.thumbnail.extension}`,
         type: 'character',
       });
 
@@ -128,7 +129,7 @@ const CharactersBox: React.FC = () => {
                     <p>{character.name}</p>
                   </div>
 
-                  <FavContainer onClick={() => handleFavorite(character.id)}>
+                  <FavContainer onClick={() => handleFavorite(character)}>
                     {favorites?.find(
                       eachFavorite => eachFavorite.favorite_id === character.id,
                     ) ? (
