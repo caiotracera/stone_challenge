@@ -42,19 +42,19 @@ describe('FindFavoriteByFavoriteId', () => {
     expect(searchedFavorite?.favorite_id).toBe(favorite.favorite_id);
   });
 
-  it('should return undefined if favorite does not exists', async () => {
+  it('should not be able to return a favorite if favorite does not exists', async () => {
     const user = await fakeUsersRepository.create({
       username: 'johndoe',
       email: 'john.doe@example.com',
       password: '123456',
     });
 
-    const searchedFavorite = await findFavoriteByFavoriteId.execute({
-      favorite_id: 14785785,
-      user_id: user.id,
-    });
-
-    expect(searchedFavorite).toBeUndefined();
+    await expect(
+      findFavoriteByFavoriteId.execute({
+        favorite_id: 14785785,
+        user_id: user.id,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 
   it('should not be able to find favorite if user does not exists', async () => {

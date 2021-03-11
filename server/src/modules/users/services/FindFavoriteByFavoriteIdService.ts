@@ -23,7 +23,7 @@ export default class FindFavoriteByFavoriteIdService {
   public async execute({
     favorite_id,
     user_id,
-  }: IRequest): Promise<IUserFavorite | undefined> {
+  }: IRequest): Promise<IUserFavorite> {
     const user = await this.usersRepository.findById(user_id);
     if (!user) {
       throw new AppError('User not found', 404);
@@ -32,6 +32,9 @@ export default class FindFavoriteByFavoriteIdService {
     const favorite = await this.userFavoritesRepository.findByFavoriteId(
       favorite_id,
     );
+    if (!favorite) {
+      throw new AppError('Favorite not found', 404);
+    }
 
     return favorite;
   }
