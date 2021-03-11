@@ -15,6 +15,25 @@ export const Container = styled.div`
     padding: 1.5rem;
     width: 70%;
   }
+
+  @media (max-width: 1920px) {
+    width: 15vw;
+  }
+
+  @media (max-width: 1200px) {
+    width: 20vw;
+  }
+
+  @media (max-width: 860px) {
+    position: relative;
+    width: 100%;
+    max-height: 220px;
+    margin-bottom: 1rem;
+
+    img.logo {
+      display: none;
+    }
+  }
 `;
 
 export const Navbar = styled.nav`
@@ -32,6 +51,10 @@ export const Navbar = styled.nav`
 
     svg {
       margin: 0 1.5rem 0 1.5rem;
+
+      @media (max-width: 860px) {
+        height: 100%;
+      }
     }
 
     color: #fff;
@@ -45,6 +68,10 @@ export const Navbar = styled.nav`
     &.active {
       border-left: 3px solid white;
       font-weight: bold;
+    }
+
+    @media (max-width: 860px) {
+      height: 5000px;
     }
   }
 `;
@@ -73,5 +100,13 @@ export const Footer = styled.div`
 
   &:hover {
     background: ${darken(0.05, '#d71414')};
+  }
+
+  @media (max-width: 860px) {
+    margin-top: 1.5rem;
+    img {
+      height: 25px;
+      width: 25px;
+    }
   }
 `;
