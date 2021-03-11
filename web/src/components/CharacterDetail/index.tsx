@@ -2,7 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { Container, CharacterContainer } from './styles';
+import { FaHeart } from 'react-icons/fa';
+import { FiHeart } from 'react-icons/fi';
+import { Container, CharacterContainer, FavoriteContainer } from './styles';
+import api from '../../services/api';
 
 type IComicData = {
   resourceURI: string;
@@ -23,8 +26,18 @@ type ICharacterData = {
 type ICharacterParam = {
   id: string;
 };
+
+type IFavoriteData = {
+  id: string;
+  favorite_id: number;
+  name: string;
+  avatar_url: string;
+  type: string;
+};
+
 const CharacterDetailContainer: React.FC = () => {
   const [selectedCharacter, setSelectedCharacter] = useState<ICharacterData>();
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const params = useParams<ICharacterParam>();
   const history = useHistory();
@@ -36,6 +49,27 @@ const CharacterDetailContainer: React.FC = () => {
     },
     [history],
   );
+
+  const handleIsFavorite = useCallback(async () => {
+    if (selectedCharacter) {
+      if (isFavorite) {
+        const favorite = await api.get(
+          `me/favorites/${selectedCharacter.id}/find`,
+        );
+        await api.delete(`me/favorites/${favorite.data.id}`);
+        setIsFavorite(false);
+        return;
+      }
+
+      await api.post<IFavoriteData>(`me/favorites`, {
+        favorite_id: selectedCharacter.id,
+        name: selectedCharacter.name,
+        avatar_url: `${selectedCharacter.thumbnail.path}.${selectedCharacter.thumbnail.extension}`,
+        type: 'characters',
+      });
+      setIsFavorite(true);
+    }
+  }, [isFavorite, selectedCharacter]);
 
   useEffect(() => {
     axios
@@ -51,6 +85,14 @@ const CharacterDetailContainer: React.FC = () => {
           thumbnail: response.data.data.results[0].thumbnail,
         });
       });
+
+    api.get<IFavoriteData[]>('/me/favorites/characters').then(response => {
+      response.data.forEach(item => {
+        if (item.favorite_id === Number(params.id)) {
+          setIsFavorite(true);
+        }
+      });
+    });
   }, [params.id]);
 
   return (
@@ -63,7 +105,23 @@ const CharacterDetailContainer: React.FC = () => {
           />
           <h1>{selectedCharacter.name}</h1>
 
-          <p>{selectedCharacter.description}</p>
+          <FavoriteContainer>
+            <button type="button" onClick={handleIsFavorite}>
+              {isFavorite ? (
+                <>
+                  <FaHeart size={24} color="e83f5b" />
+                  Remover dos favoritos
+                </>
+              ) : (
+                <>
+                  <FiHeart size={24} color="e83f5b" />
+                  Adicionar aos favorites
+                </>
+              )}
+            </button>
+          </FavoriteContainer>
+
+          <p className="description">{selectedCharacter.description}</p>
 
           <ul className="comics">
             <p>Comics:</p>

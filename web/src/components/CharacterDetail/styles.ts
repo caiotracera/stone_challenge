@@ -19,7 +19,11 @@ export const Container = styled.div`
   }
 
   h1 {
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .description {
+    margin-top: 1.5rem;
   }
 `;
 
@@ -39,6 +43,19 @@ export const CharacterContainer = styled.div`
     li {
       margin: 0.5rem 0;
       cursor: pointer;
+    }
+  }
+`;
+
+export const FavoriteContainer = styled.div`
+  button {
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      margin-right: 0.5rem;
     }
   }
 `;
