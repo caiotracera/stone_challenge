@@ -19,7 +19,7 @@ router.get(
 );
 
 router.get(
-  '/:favorite_id',
+  '/:favorite_id/find',
   celebrate({
     [Segments.PARAMS]: {
       favorite_id: Joi.number().required(),

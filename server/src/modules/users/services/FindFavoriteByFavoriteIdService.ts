@@ -32,6 +32,7 @@ export default class FindFavoriteByFavoriteIdService {
     const favorite = await this.userFavoritesRepository.findByFavoriteId(
       favorite_id,
     );
+
     if (!favorite) {
       throw new AppError('Favorite not found', 404);
     }
